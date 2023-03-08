@@ -18,8 +18,8 @@ class UserSignUpView(APIView):
 		serializer = UserSerializer(data=request.data)
 		if serializer.is_valid():
 			serializer.save()
-		return Response({'status': 200,
+			return Response({'status': 200,
 			'message':'user has been created successfully'})
-	else:
-		return Response({'status':403, 'message': 'email already exists'})
-		
+		else:
+			return Response({'status':403, 'message': 'email already exists'})
+
