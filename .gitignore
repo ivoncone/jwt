@@ -3,4 +3,9 @@ ENV
 /ENV
 /env
 *env
+*migrations
+/migrations
+migrations
+db.sqlite3
+.env
 
