@@ -12,6 +12,6 @@ from events.serializers import EventSerializer
 class EventsView(APIView):
 	def get(self, request):
 		events = Events.objects.all()
-		serializer = EventsSerializer(events, many=True)
+		serializer = EventSerializer(events, many=True)
 		return Response({'status': 200,
 			'message': serializer.data})
