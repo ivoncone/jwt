@@ -9,5 +9,5 @@ class EventSerializer(serializers.ModelSerializer):
 
 	class Meta:
 		model = Events
-		fiels = ['__all__']
+		fiels = ['event_name', 'event_description', 'placee','contact', 'reservation', 'date']
 
