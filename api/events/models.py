@@ -6,8 +6,8 @@ class Events(models.Model):
 	event_description = models.TextField()
 	place = models.CharField(max_length=250)
 	contact = models.CharField(max_length=250)
-	reservation = models.URLField(max_length=20)
-	date = models.DateTimeField()
+	reservation = models.URLField(max_length=200)
+	date = models.DateField()
 	created_at = models.DateTimeField(auto_now_add=True)
 	updated_at = models.DateTimeField(auto_now_add=True)
 
