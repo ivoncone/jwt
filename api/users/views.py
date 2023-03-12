@@ -27,7 +27,7 @@ class LoginView(APIView):
 	def post(self, request):
 		email = request.data['email']
 		password = request.data['password']
-		user = User.objects.filter(email=email),first()
+		user = User.objects.filter(email=email).first()
 
 		if user is None:
 			return Response({'status': 404,
