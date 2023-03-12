@@ -42,6 +42,8 @@ class LoginView(APIView):
 		if not user.check_password(password):
 			return Response({'status': 401, 'message': 'Incorrect password'})
 
+
+
 		payload = {
 			'id': user.id,
 			'exp': datetime.datetime.utcnow() + datetime.timedelta(minutes=60),
@@ -67,8 +69,8 @@ class UserView(APIView):
 
 	def get(self, request):
 		user = User.objects.get(email=request.user)
-		if User.objects.filter(user=user).exists():
-			user = User.objects.filter(user=user).first()
+		if User.objects.filter(id=id).exists():
+			user = User.objects.filter(id=id).first()
 			serializer = UserSerializer(user)
 			return Response({'status':200, 'data': serializer.data})
 		return Response({'status': 404, 'message': 'este usuario no ha sido creado'})
