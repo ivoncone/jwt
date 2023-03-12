@@ -37,7 +37,7 @@ class LoginView(APIView):
 
 		payload = {
 			'id': user.id,
-			'exp': datetime.datetime.utcnow() + datetime.timedelta(minutes=60)
+			'exp': datetime.datetime.utcnow() + datetime.timedelta(minutes=60),
 			'iat': datetime.datetime.utcnow()
 		}
 
@@ -54,4 +54,15 @@ class LoginView(APIView):
 		}
 
 		return response
+
+class UserView(APIView):
+	permission_classes = [IsAuthenticated]
+
+	def get(self, request):
+		user = User.objects.get(email=request.user)
+		if User.objects.filter(user=user).exists():
+			user = User.objects.filter(user=user).first()
+			serializer = UserSerializer(user)
+			return Response({'status':200, 'data': serializer.data})
+		return Response({'status': 404, 'message': 'este usuario no ha sido creado'})
 
