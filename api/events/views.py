@@ -10,6 +10,7 @@ from events.serializers import EventSerializer
 
 # Show the list of all events in website
 class EventsView(APIView):
+	permission_classes = [IsAuthenticated]
 	def get(self, request):
 		events = Events.objects.all()
 		serializer = EventSerializer(events, many=True)

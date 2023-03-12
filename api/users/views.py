@@ -64,14 +64,5 @@ class LoginView(APIView):
 
 		return response
 
-class UserView(APIView):
-	permission_classes = [IsAuthenticated]
 
-	def get(self, request):
-		user = User.objects.get(email=request.user)
-		if User.objects.filter(id=id).exists():
-			user = User.objects.filter(id=id).first()
-			serializer = UserSerializer(user)
-			return Response({'status':200, 'data': serializer.data})
-		return Response({'status': 404, 'message': 'este usuario no ha sido creado'})
 
