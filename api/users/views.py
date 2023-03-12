@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.contrib import messages
+from django.contrib.auth.hashers import check_passsword
 
 from rest_framework import status, permissions
 from rest_framework.views import APIView
@@ -34,7 +35,7 @@ class LoginView(APIView):
 		if user is None:
 			return Response({'status': 404,
 				'message': 'User not found'})
-		if not user.check_passsword(password):
+		if not user.check_password(password):
 			return Response({'status': 401, 'message': 'Incorrect password'})
 
 		payload = {
