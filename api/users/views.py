@@ -13,6 +13,10 @@ from rest_framework_simplejwt.tokens import RefreshToken
 from .models import User 
 from .serializers import UserSerializer
 
+import datetime
+from datetime import timedelta
+
+
 # New user register
 class UserSignUpView(APIView):
 	permission_classes = [AllowAny]
