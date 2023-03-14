@@ -1,4 +1,4 @@
-from django.shortcuts import render
+ from django.shortcuts import render
 from django.contrib import messages
 from django.contrib.auth.hashers import check_password
 
@@ -8,7 +8,7 @@ from rest_framework.response import Response
 
 from rest_framework.permissions import AllowAny, IsAuthenticated
 
-from rest_framework_simplejwt.tokens import RefreshToken
+from rest_framework_simplejwt.tokens import AccessToken, RefreshToken
 
 from .models import User 
 from .serializers import UserSerializer
@@ -42,24 +42,16 @@ class LoginView(APIView):
 		if not user.check_password(password):
 			return Response({'status': 401, 'message': 'Incorrect password'})
 
-
-
-		payload = {
-			'id': user.id,
-			'exp': datetime.datetime.utcnow() + datetime.timedelta(minutes=60),
-			'iat': datetime.datetime.utcnow()
-		}
-
+		access = AccessToken.for_user(user)
 		refresh = RefreshToken.for_user(user)
 
 		response = Response()
 
 		response.data = {
-			'access': str(refresh.access_token),
+			'access': str(access),
 			'refresh': str(refresh),
 			'status': 200,
 			'id': user.id,
-
 		}
 
 		return response
